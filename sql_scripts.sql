@@ -55,3 +55,24 @@ select replace(seller_city,"c","b" ) as new_state  from sellers;
 select seller_city,replace(seller_city,"campinas","barara" ) from sellers;
 
 select concat(seller_city,"-",seller_state) as city_state from sellers;
+select *,concat(seller_city,"-",seller_state) as city_state from sellers;
+-- To retrieve the entore columns along with the concat function
+
+-- Date and time function
+SELECT 
+    order_purchase_timestamp,
+    DAY(order_purchase_timestamp),
+    MONTH(order_purchase_timestamp),
+    MONTHNAME(order_purchase_timestamp),
+    YEAR(order_purchase_timestamp)
+FROM
+    orders;
+
+select datediff(order_estimated_delivery_date,order_delivered_customer_date) from orders;
+
+-- ceil and floor functions
+select payment_value,ceil(payment_value) from payments;-- upper round off value
+select payment_value,floor(payment_value) from payments;-- lower round off value
+
+-- null value 
+select * from orders where order_delivered_customer_date is null;

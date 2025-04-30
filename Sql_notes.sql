@@ -140,4 +140,56 @@ SELECT REPLACE('Hello World', 'World', 'SQL') AS result;
 The CONCAT() function is used to combine two or more strings into one.
 CONCAT(string1, string2, ..., stringN)
 select concat(seller_city,"-",seller_state) as city_state from sellers;
+
+select *,concat(seller_city,"-",seller_state) as city_state from sellers;
+-- To retrieve the entire columns along with the concat function
 */
+/* 
+The Date  is used to gather date  related information
+SELECT 
+    order_purchase_timestamp,
+    DAY(order_purchase_timestamp),
+    MONTH(order_purchase_timestamp),
+    MONTHNAME(order_purchase_timestamp),
+    YEAR(order_purchase_timestamp)
+FROM
+    orders;
+datediff() is used to get difference between two dates
+select datediff(order_estimated_delivery_date,order_delivered_customer_date) from orders;
+*/
+/*
+-- ceil and floor functions
+select payment_value,ceil(payment_value) from payments;-- upper round off value
+select payment_value,floor(payment_value) from payments;-- lower round off value
+*/
+/*
+-- null value 
+select * from orders where order_delivered_customer_date is null;
+*/
+/*
+The GROUP BY statement is often used with aggregate functions ( COUNT() , MAX() , MIN() , SUM() , AVG() )
+ to group the result-set by one or more columns.
+SELECT column_name, AGGREGATE_FUNCTION(column_name)
+FROM table_name
+GROUP BY column_name
+SELECT product_id, SUM(sale_amount) AS total_sales
+FROM sales
+GROUP BY product_id;
+🔸 Groups sales data by product and gives total sales per product.
+*/
+/*
+HAVING is used with GROUP BY to filter grouped results based on aggregate functions (like SUM(), COUNT(), etc.).
+🔸 WHERE filters rows before grouping
+🔸 HAVING filters groups after grouping
+SELECT column_name, AGG_FUNC(column_name)
+FROM table_name
+GROUP BY column_name
+HAVING condition;
+
+SELECT product_id, SUM(sale_amount) AS total_sales
+FROM sales
+WHERE sale_amount > 100     -- filter raw data first
+GROUP BY product_id
+HAVING SUM(sale_amount) > 1000;  -- then filter grouped result
+
+ */
