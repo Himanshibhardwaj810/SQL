@@ -191,5 +191,21 @@ FROM sales
 WHERE sale_amount > 100     -- filter raw data first
 GROUP BY product_id
 HAVING SUM(sale_amount) > 1000;  -- then filter grouped result
-
  */
+ 
+/*
+A JOIN is used in SQL to combine rows from two or more tables based on a related column between them.
+SELECT table1.column1, table2.column2
+FROM table1
+JOIN table2
+ON table1.common_column = table2.common_column;
+select customers.customer_id,orders.order_status from customers Join orders
+on customers.customer_id=orders.customer_id
+where order_status="cancelled";
+
+i) INNER JOIN	Returns rows where matches exist in both tables
+ii) LEFT JOIN	Returns all rows from the left table, and matching rows from right table
+iii)RIGHT JOIN	Returns all rows from the right table, and matching rows from left table
+iv)FULL OUTER JOIN	Returns all rows when there's a match in one of the tables
+v)CROSS JOIN	Returns Cartesian product – all combinations of rows
+*/
