@@ -209,3 +209,107 @@ iii)RIGHT JOIN	Returns all rows from the right table, and matching rows from lef
 iv)FULL OUTER JOIN	Returns all rows when there's a match in one of the tables
 v)CROSS JOIN	Returns Cartesian product – all combinations of rows
 */
+
+/*
+A subquery is a query inside another SQL query. It is enclosed in parentheses ( ) and is used to 
+return values that are used by the main (outer) query.
+select products.product_category,payments.payment_value
+from products Join order_items
+on products.product_id=order_items.product_id
+join payments on payments.order_id=order_items.order_id;
+*/
+
+/*
+A Common Table Expression (CTE) is a temporary result set (like a virtual table) that you define at the
+beginning of a SQL query using the WITH keyword. It makes complex queries easier to read, reuse, and
+ break into steps.
+ WITH cte_name AS (
+    SELECT column1, column2
+    FROM some_table
+    WHERE condition
+)
+SELECT * FROM cte_name;
+
+with category_table as (select products.product_category as category,
+sum(payments.payment_value) as sales
+from products Join order_items
+on products.product_id=order_items.product_id
+join payments on payments.order_id=order_items.order_id
+group by category 
+order by sales desc limit 1)
+
+select category from category_table;
+*/
+
+/* 
+The CASE operator in SQL is like an if-else or switch-case statement in programming.
+ It lets you return different values based on conditions in a SELECT, WHERE, ORDER BY, or
+ GROUP BY clause.
+ 
+ SELECT 
+  column1,
+  CASE 
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    ELSE default_result
+  END AS alias_name
+FROM table_name;
+
+select sales, 
+Case
+when sales>= 21000 then "high"
+when sales>=10000 then "low"
+else  "least "
+end as sales_type
+from category_table;
+
+or 
+select 
+Case
+when sales>= 21000 then "high"
+when sales>=10000 then "low"
+else  "least "
+end as sales_type
+from category_table;
+*/
+
+/*
+Window functions perform calculations across a set of rows that are related to the current row, 
+without collapsing rows like GROUP BY does.
+SELECT column1,
+       window_function() OVER (
+           PARTITION BY column2
+           ORDER BY column3
+           ROWS BETWEEN ... -- optional
+       ) AS alias
+FROM table_name;
+
+Function	Use
+ROW_NUMBER()	Assigns a unique number to each row
+RANK()	Ranking with gaps (1,2,2,4...)
+ ranking with leaves the space for repeating the no 
+ 🟠 Notice the jump: Two students got rank 2, so the next rank is 4 (it skips rank 3).
+DENSE_RANK()	Ranking without gaps (1,2,2,3...)
+🟢 No gaps: Two students tied at rank 2, and the next is rank 3.
+SUM()	Running total
+AVG()	Moving average
+
+-- You cannot use ORDER BY + LIMIT inside a CTE (a) like that,
+--  if you're going to use it again with a RANK() in the next
+-- CTE (b). That's because:
+-- RANK() requires all rows to assign rank values.
+-- But your LIMIT 1 cuts off the data in CTE a to just 1 row.
+-- So RANK() never gets a full list to assign rank from.
+
+
+*/
+
+/*
+A view is a virtual table in SQL. It doesn't store data itself but displays data from one or 
+more real tables using a predefined SELECT query.
+
+CREATE VIEW view_name AS
+SELECT column1, column2
+FROM table_name
+WHERE condition;
+*/
