@@ -15,6 +15,9 @@ managing and manipulating databases. It allows users to interact with
 The WHERE clause is used in SQL to filter records that meet specific 
 conditions. It is typically used in combination with SELECT, UPDATE, DELETE, 
 and other SQL commands to specify which records you want to work with.
+
+note=You cannot use an aggregate function (MAX, MIN, LEN) like that inside a
+WHERE clause without using a subquery or CTE.
 */
 -- select * from customers where customer_state="MG";
 --       OPERATORS
@@ -95,6 +98,19 @@ Round functon is used to round off the value
 it take value as first parameter and the round off digit as 2nd parameter
 select round(sum(payment_value),2) as Aggregate_sum from payments;
 */
+/*
+The DIFFERENCE() function is used to compare two strings and returns a value between 0 and 4 based on their
+ phonetic similarity using the SOUNDEX algorithm.
+SELECT DIFFERENCE('smith', 'smyth');  -- Returns 4 (very similar)
+SELECT DIFFERENCE('smith', 'john');   -- Returns 0 (very different)
+*/
+/*
+If you want to find the difference between integers in SQL, you simply use basic subtraction (-) — 
+no special function is needed.
+SELECT column1 - column2 AS difference
+FROM table_name;
+select count(city)-count(distinct(city)) from station;
+*/
 /* 
 max function return maximum value
 select max(payment_value) from payments;
@@ -122,6 +138,8 @@ SELECT DISTINCT city, state FROM customers;
 The LENGTH() function returns the number of characters (or bytes, depending on DBMS) in a string.
 SELECT LENGTH(column_name) FROM table_name;
 SELECT name FROM customers WHERE LENGTH(name) > 10;
+
+and char_length() is useed to retrieve the length of characters in string
 */
 /*
 The TRIM() function removes leading (start) and trailing (end) spaces from a string.
