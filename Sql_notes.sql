@@ -162,6 +162,19 @@ select concat(seller_city,"-",seller_state) as city_state from sellers;
 select *,concat(seller_city,"-",seller_state) as city_state from sellers;
 -- To retrieve the entire columns along with the concat function
 */
+/*
+The RIGHT() function in SQL extracts a specified number of characters
+ from the end (right side) of a string.
+ RIGHT(string, number_of_characters)
+string – The text you want to extract characters from.
+number_of_characters – How many characters you want from the right end of the string.
+
+ SELECT Name
+FROM Students
+WHERE Marks > 75
+ORDER BY RIGHT(Name, 3), ID;
+
+*/
 /* 
 The Date  is used to gather date  related information
 SELECT 
