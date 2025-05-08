@@ -126,6 +126,7 @@ select avg(payment_value) from payments;
 /*
 The COUNT() function returns the number of rows that match a condition.
 select count(customer_id) from customers;
+In SQL, you cannot combine aggregates and non-aggregated columns without a GROUP BY.
 */
 /*
 The DISTINCT keyword is used to remove duplicates and return only unique values from a column.
@@ -200,6 +201,7 @@ select * from orders where order_delivered_customer_date is null;
 /*
 The GROUP BY statement is often used with aggregate functions ( COUNT() , MAX() , MIN() , SUM() , AVG() )
  to group the result-set by one or more columns.
+ In SQL, you cannot combine aggregates and non-aggregated columns without a GROUP BY.
 SELECT column_name, AGGREGATE_FUNCTION(column_name)
 FROM table_name
 GROUP BY column_name
