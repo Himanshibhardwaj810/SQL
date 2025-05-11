@@ -317,6 +317,12 @@ SELECT column1,
        ) AS alias
 FROM table_name;
 
+PARTITION BY: Like a GROUP BY, but keeps all rows.
+
+ORDER BY: Tells how to order rows within the partition.
+
+OVER(): Tells SQL "apply this window function."
+
 Function	Use
 ROW_NUMBER()	Assigns a unique number to each row
 RANK()	Ranking with gaps (1,2,2,4...)
@@ -345,4 +351,24 @@ CREATE VIEW view_name AS
 SELECT column1, column2
 FROM table_name
 WHERE condition;
+*/
+
+/*
+SELECT *
+FROM (
+    SELECT lat_n, ROW_NUMBER() OVER (ORDER BY lat_n) AS rank
+    FROM station
+) AS numbered;
+You gave the subquery a temporary name: numbered
+Without it, SQL wouldn't know what to call that derived table.
+*/
+/*
+COUNT(*) means:
+
+"Count the total number of rows in the table (including NULLs)."
+SELECT COUNT(lat_n) FROM station;
+➡️ Counts only non-null values in lat_n.
+So:
+COUNT(*) = total rows
+COUNT(column_name) = non-null values in that column
 */
